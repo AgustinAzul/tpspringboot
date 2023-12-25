@@ -44,4 +44,11 @@ public class ProductoController {
         produService.editProducto(producto);
         return produService.getProducto(producto.getCodigoProducto());
     }
+    
+    @GetMapping("/productos/falta_stock")
+    public List<Producto> getMenoresAcinco(){
+        return produService.menoresAcinco();
+    }
+    
+    
 }
