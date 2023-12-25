@@ -1,8 +1,12 @@
 
 package com.agustinserrano.tpspringboot.controller;
 
+import com.agustinserrano.tpspringboot.dto.MayorVentaDTO;
+import com.agustinserrano.tpspringboot.dto.VentasPorDiaDTO;
+import com.agustinserrano.tpspringboot.model.Producto;
 import com.agustinserrano.tpspringboot.model.Venta;
 import com.agustinserrano.tpspringboot.model.service.IVentaService;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,5 +47,20 @@ public class VentaController {
     public Venta editVenta(@RequestBody Venta venta){
         ventaService.saveVenta(venta);
         return ventaService.getVenta(venta.getCodigoVenta());
+    }
+    
+    @GetMapping("ventas/productos/{codigo_venta}")
+    public List<Producto> getProductosVenta(@PathVariable Long codigo_venta){
+        return ventaService.getProductosVenta(codigo_venta);
+    }
+    
+    @GetMapping("ventas/dia/{fecha_venta}")
+    public VentasPorDiaDTO getVentasPorDia(@PathVariable LocalDate fecha_venta){
+        return ventaService.getVentasDia(fecha_venta);
+    }
+    
+    @GetMapping("ventas/mayor_venta")
+    public MayorVentaDTO getMayorVenta(){
+        return ventaService.getMayorVenta();
     }
 }
